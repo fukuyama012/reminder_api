@@ -13,16 +13,17 @@
 ActiveRecord::Schema.define(version: 2018_09_26_150024) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "reminders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
-    t.string "notify"
-    t.text "description"
-    t.integer "cycle_days"
-    t.bigint "category_id"
+    t.string "notify", null: false
+    t.text "description", null: false
+    t.integer "cycle_days", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_reminders_on_category_id"
