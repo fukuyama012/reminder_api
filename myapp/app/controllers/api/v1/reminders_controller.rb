@@ -20,7 +20,7 @@ module Api
         @reminder = Reminder.new(reminder_params)
 
         if @reminder.save
-          render json: @reminder, status: :created, location: @reminder
+          render json: @reminder, status: :created
         else
           render json: @reminder.errors, status: :unprocessable_entity
         end
