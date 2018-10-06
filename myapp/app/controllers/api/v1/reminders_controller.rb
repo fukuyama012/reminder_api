@@ -48,7 +48,7 @@ module Api
 
       # Only allow a trusted parameter "white list" through.
       def reminder_params
-        params.require(:reminder).permit(:notify, :description, :cycle_days, :category)
+        params.require(:reminder).permit(:notify, :description, :cycle_days, :category_id)
       end
     end
   end
