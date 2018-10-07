@@ -145,7 +145,7 @@ RSpec.describe "Categories", type: :request do
       end
     end
     
-    context '3-2. 余計ないparamsがあってもdelete動作する' do
+    context '3-2. 余計なparamsがあってもdelete動作する' do
       before do
         @category = create(:category)
         @path = "/api/v1/categories/#{@category.id}"
