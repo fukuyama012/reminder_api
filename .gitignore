@@ -54,3 +54,22 @@ node_modules/
 # docker mysql data
 mysql/data
 mysql/logs
+
+## myapp
+# Ignore bundler config.
+myapp/.bundle
+
+# Ignore all logfiles and tempfiles.
+myapp/log/*
+myapp/tmp/*
+!myapp/log/.keep
+!myapp/tmp/.keep
+
+# Ignore uploaded files in development
+myapp/storage/*
+!myapp/storage/.keep
+
+myapp/.byebug_history
+
+# Ignore master key for decrypting credentials and more.
+myapp/config/master.key
