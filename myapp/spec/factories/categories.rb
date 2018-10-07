@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :category do
-    name { "morning routine" }
+    sequence(:name)   { |n| "morning routine#{n}" }
   end
 end

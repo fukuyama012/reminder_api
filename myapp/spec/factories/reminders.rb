@@ -3,6 +3,6 @@ FactoryBot.define do
     notify { "MyString" }
     description { "MyText" }
     cycle_days { 1 }
-    category { nil }
+    category
   end
 end
