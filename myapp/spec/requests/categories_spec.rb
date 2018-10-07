@@ -124,5 +124,44 @@ RSpec.describe "Categories", type: :request do
         }.not_to change(Category, :count)
       end 
     end
-  end 
+  end
+
+  describe 'DELETE /api/v1/categories/:id' do
+    context '3-1. パラメータが正しいとき' do
+      before do
+        @category = create(:category)
+        @path = "/api/v1/categories/#{@category.id}"
+      end
+
+      it '204 No Content が返ってくる' do
+        delete @path, params: {}
+        expect(response.status).to eq(204)
+      end
+
+      it 'カテゴリが減少する' do
+        expect {
+          delete @path, params: {}
+        }.to change(Category, :count).by(-1)
+      end
+    end
+    
+    context '3-2. 余計ないparamsがあってもdelete動作する' do
+      before do
+        @category = create(:category)
+        @path = "/api/v1/categories/#{@category.id}"
+        @params2 = { category: attributes_for(:category) }
+      end
+
+      it '204 No Content が返ってくる' do
+        delete @path, params: @params2
+        expect(response.status).to eq(204)
+      end
+
+      it 'カテゴリが減少する' do
+        expect {
+          delete @path, params: @params2
+        }.to change(Category, :count).by(-1)
+      end
+    end
+  end
 end
