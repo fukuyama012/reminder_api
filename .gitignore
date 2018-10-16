@@ -1,10 +1,6 @@
 *.rbc
 capybara-*.html
-#.rspec
-/log
-/tmp
-/db/*.sqlite3
-/db/*.sqlite3-journal
+.rspec
 /public/system
 /coverage/
 /spec/tmp
@@ -16,16 +12,13 @@ pickle-email-*.html
 config/initializers/secret_token.rb
 config/master.key
 
-# Only include if you have production secrets in this file, which is no longer a Rails default
-# config/secrets.yml
-
 # dotenv
 # TODO Comment out this rule if environment variables can be committed
-#.env
+.env
 
 ## Environment normalization:
 /.bundle
-/vendor/bundle
+myapp/vendor/bundle
 
 # these should all be checked in to normalize the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
