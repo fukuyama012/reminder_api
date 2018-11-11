@@ -1,0 +1,69 @@
+version: 2
+jobs:
+  build:
+    machine:
+      image: circleci/classic:edge
+    steps:
+    - checkout
+    - run:
+        name: init_container.sh
+        command: sudo bash init_container.sh
+    - run:
+        name: up_service.sh
+        command: bash up_service.sh
+    - run:
+        name: exec rspec
+        command: docker-compose run app bundle exec rspec --format p --format html --out test-results/rspec.html
+    - store_artifacts:
+        path: myapp/test-results/rspec.html
+        destination: rspec.html
+    - run:
+        name: docker-compose down
+        command: docker-compose down
+  deploy-staging:
+    machine:
+      image: circleci/classic:edge
+    steps:
+    - checkout
+    - run:
+        name: heroku maintenance on
+        command: heroku maintenance:on --app ${HEROKU_APP_NAME_STAGING}
+    - run:
+        name: heroku deploy
+        command: |
+          git subtree push --prefix myapp  https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_STAGING.git master
+    - run:
+        name: heroku maintenance off
+        command: heroku maintenance:off --app ${HEROKU_APP_NAME_STAGING}
+  deploy-prod:
+    machine:
+      image: circleci/classic:edge
+    steps:
+    - checkout
+    - run:
+        name: heroku maintenance on
+        command: heroku maintenance:on --app ${HEROKU_APP_NAME_PROD}
+    - run:
+        name: heroku deploy
+        command: |
+          git subtree push --prefix myapp  https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_PROD.git master
+    - run:
+        name: heroku maintenance off
+        command: heroku maintenance:off --app ${HEROKU_APP_NAME_PROD}
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+    - build
+    - deploy-staging:
+        requires:
+        - build
+        filters:
+          branches:
+            only: staging
+    - deploy-prod:
+        requires:
+        - build
+        filters:
+          branches:
+            only: master
