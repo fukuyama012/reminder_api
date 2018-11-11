@@ -12,5 +12,3 @@ cp -f config/myapp/Gemfile myapp/Gemfile
 docker-compose run --rm app bundle install 
 
 docker-compose build
- 
-docker-compose run --rm app bundle exec rails generate rspec:install
