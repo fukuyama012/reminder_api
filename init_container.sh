@@ -11,4 +11,7 @@ cp -f config/myapp/Gemfile myapp/Gemfile
 # rspec-rails, factory_bot_rails
 docker-compose run --rm app bundle install 
 
+# node_modules
+docker-compose run --rm --workdir="/myapp/client" app yarn install
+
 docker-compose build
