@@ -21,8 +21,7 @@ module.exports = {
         port: DEV_PORT,
         host: "0.0.0.0",// for Docker access
         proxy: {
-            "/api": "http://localhost:3000",
-            "/atuh": "http://localhost:3000"
+            "/api": "http://localhost:3000/",
         }
     },
     module: {
