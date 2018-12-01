@@ -6,7 +6,8 @@ class Category extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            info: []
+            info: [],
+            ret: {}
         }
     }
 
@@ -18,16 +19,31 @@ class Category extends React.Component<any, any> {
         })
     };
 
+    category_post = () => {
+        var params = new URLSearchParams();
+        //var date = new Date();
+        //params.append("category[name]", "test "+date.getTime());
+        params.append("category[name]", "test-test");
+        axios.post('/api/v1/categories', params).then(response => {
+            this.setState({
+                ret: response.data
+            })
+        })
+    };
+
     render() {
         return (
             <div>
+                <button onClick={this.category}>カテゴリ閲覧</button>
+                <br/>
+                <button onClick={this.category_post}>カテゴリ投稿</button>
                 <ul>
-                {this.state.info.map((elm) => {
-                    return <li>{elm.name}</li>
-                    }
-                )}
+                    {this.state.info.map((elm) => {
+                            return <li>{elm.name}</li>
+                        }
+                    )}
                 </ul>
-                <button onClick={this.category}>ボタン</button>
+                {this.state.ret.name}
             </div>
         )
     }
