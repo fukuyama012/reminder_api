@@ -6,14 +6,14 @@ class Category extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            text: ''
+            info: []
         }
     }
 
     category = () => {
-        axios.get('/api/v1/categories/1').then(response => {
+        axios.get('/api/v1/categories').then(response => {
             this.setState({
-                text: response.data.name
+                info: response.data
             })
         })
     };
@@ -21,8 +21,12 @@ class Category extends React.Component<any, any> {
     render() {
         return (
             <div>
-                {this.state.text}
-                <br />
+                <ul>
+                {this.state.info.map((elm) => {
+                    return <li>{elm.name}</li>
+                    }
+                )}
+                </ul>
                 <button onClick={this.category}>ボタン</button>
             </div>
         )
