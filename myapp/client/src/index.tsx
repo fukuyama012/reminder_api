@@ -20,10 +20,12 @@ class Category extends React.Component<any, any> {
     };
 
     category_post = () => {
+        var date = new Date();
+        const y = date.getFullYear();
+        const m = date.getMonth() + 1;
+        const d = date.getDate();
         var params = new URLSearchParams();
-        //var date = new Date();
-        //params.append("category[name]", "test "+date.getTime());
-        params.append("category[name]", "test-test");
+        params.append("category[name]", `${y}/${m}/${d}`);
         axios.post('/api/v1/categories', params).then(response => {
             this.setState({
                 ret: response.data
