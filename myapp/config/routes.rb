@@ -7,5 +7,10 @@ Rails.application.routes.draw do
     end
   end
 
+  #get "/client", to: "static_pages#index"
+  namespace :client do
+    root "static_pages#index"
+  end
+  
   root to: ->(_) { [200, { 'Content-Type' => 'text/plain' }, ['ok']] }
 end
