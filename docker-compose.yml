@@ -10,6 +10,7 @@ services:
     - ./myapp:/myapp
     ports:
     - "3000:3000"
+    - "3500:3500"
     links:
     - db
   
